@@ -22,7 +22,8 @@ class TransactionResource extends JsonResource
             "price" => $this->ir_price,
             "fee" => $this->fee,
             "total" => $this->total_price,
-            'created_at' => $this->created_at
+            'created_at' => $this->created_at,
+            'total_orders' => $this->total
         ];
     }
 }

@@ -65,4 +65,11 @@ class Transaction extends Model
     {
         return number_format($price, 0, '.', ',');
     }
+
+    // calc total_orders
+    public function getTotalAttribute() : string
+    {
+        $total_orders = Transaction::query()->sum(self::raw('price * weight + fee'));
+        return number_format($total_orders, 0, '.', ',');
+    }
 }

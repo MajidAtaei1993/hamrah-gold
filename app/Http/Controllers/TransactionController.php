@@ -20,8 +20,6 @@ class TransactionController extends Controller
             // load reletions
             $transactions = Transaction::with(['user'])->orderBy('created_at', 'desc')->paginate(10);
 
-            // calc total_orders
-            // $totalOrders = Transaction::query()->sum(DB::raw('price * weight + fee'));
             return response()->json([
                 'data' => TransactionResource::collection($transactions),
                 'meta' => [
@@ -55,8 +53,8 @@ class TransactionController extends Controller
         // // get gold price from tgju
         // $tgju = new TgjuController();
         // $goldPrice = $tgju->price();
+        $firstUser = User::first();
         try {
-            $firstUser = User::first();
             $transaction = Transaction::create([
                 // 'user_id' => $request->user_id,
                 'user_id' => $firstUser ? $firstUser->id : null,

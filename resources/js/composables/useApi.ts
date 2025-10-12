@@ -2,7 +2,7 @@
 import useToast from '@/composables/useToast'
 const toast = useToast()
 
-const baseUrl = 'http://hamrah-gold.test/api/'
+const baseUrl = 'http://hamrah_gold.test/api/'
 
 export async function useApi<T = any>(
     endpoint: string,

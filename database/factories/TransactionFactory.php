@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Transaction;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -9,11 +10,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class TransactionFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
+    protected $model = Transaction::class;
     public function definition(): array
     {
         return [

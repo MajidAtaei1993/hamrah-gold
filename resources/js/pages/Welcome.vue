@@ -9,15 +9,17 @@
         <v-card variant="tonal" width="100%" height="70vh" class="rounded-t-0 d-flex align-start" :loading="store.loading">
 
             <!-- left panel show all transactions -->
-            <v-card-text class="w-75 h-100 border-r pa-2">
+            <v-card-text class="w-75 h-100 border-r pa-2 position-relative overflow-hidden">
                 <DataTable :items="store.transactions" :headers="store.headers" :loading="store.loading">
 
                     <!-- slot for footer -->
                     <template #bottom>
-                        <div class="border-t px-6 pt-3 d-flex align-center justify-space-between">
-                            <span class="text-h6 text-capitalize">total order</span>
-                            <span>{{ store.totalOrders }}</span>
+                        <div class="border-t px-6 pt-3 d-flex align-center justify-space-between position-absolute bottom-0 w-100 left-0 mb-3">
+                            <span class="text-h6 text-capitalize">total order: {{ store.transactions.length }}</span>
+                            <span class="text-h6 text-capitalize">total Weight: {{ totalWeight }}</span>
+                            <span class="text-h6 text-capitalize">total IRR: {{ formattedTotalIRR }}</span>
                         </div>
+                        <v-pagination></v-pagination>
                     </template>
 
                     <!-- type -->
@@ -52,7 +54,7 @@
                     <template #title>
                         <div class="d-flex align-center justify-space-between">
                             <span class="text-capitalize">{{ store.gold_price.name }}</span>
-                            <span>{{ store.gold_price.buy_price }}</span>
+                            <span>{{ store.gold_price.buy_price }} IRR</span>
                         </div>
                     </template>
                     
@@ -77,7 +79,7 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, onMounted, onUnmounted } from 'vue'
+import { reactive, onMounted, onUnmounted, computed } from 'vue'
 import { useTransactionStore } from '@/stores/transaction'
 
 const store = useTransactionStore()
@@ -101,6 +103,24 @@ onMounted(async() => {
 
     // // cleanup on unmount
     // onUnmounted(() => clearInterval(interval));
+})
+
+const totalWeight = computed(() => {
+    return store.transactions.reduce(
+        (sum, tr) => sum + Number(tr.weight || 0),
+        0
+    )
+})
+
+const totalIRR = computed(() => {
+    return store.transactions.reduce((sum, tr) => {
+        const total = Number((tr.total || '0').toString().replace(/,/g, ''))
+        return sum + total
+    }, 0)
+})
+
+const formattedTotalIRR = computed(() => {
+    return totalIRR.value.toLocaleString('en-US')
 })
 </script>
 

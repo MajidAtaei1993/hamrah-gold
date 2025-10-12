@@ -19,15 +19,7 @@ export const useTransactionStore = defineStore('transaction',{
         ],
         gold_price: [] as any
     }),
-    getters: {
-        totalOrders(state): string {
-            const total = state.transactions.reduce((acc, transaction) => {
-                return acc + (Number(transaction.price) * Number(transaction.weight) + Number(transaction.fee));
-            }, 0);
-            
-            return total.toLocaleString()
-        }
-    },
+    getters: {},
     actions: {
 
         // allTransactions
