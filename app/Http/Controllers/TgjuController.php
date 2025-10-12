@@ -34,17 +34,15 @@ class TgjuController extends Controller
 
                 // If gold data exists
                 if ($gold) {
-                    return response()->json([
-                        'success' => true,
-                        'name' => 'geram18',
-                        'buy_price' => $this->formatWithDots($gold['p']) . ' IRR',  // current price
-                        'sell_price' => $this->formatWithDots($gold['h']) . ' IRR', // highest price
-                        'low_price' => $this->formatWithDots($gold['l']) . ' IRR',  // lowest price
-                        'change' => floatval($gold['d'] ?? 0),
-                        'change_percent' => isset($gold['dp']) ? floatval($gold['dp']) . ' %' : null,
-                        'time' => $gold['t_en'] ?? null,     // e.g. 19:56:26
-                        'timestamp' => $gold['ts'] ?? null,  // e.g. 2025-10-11 19:56:26
-                    ]);
+                    return (object) [
+                        'name'         => "gold-18",
+                        'buy_price'    => $this->formatWithDots($gold['p']),
+                        'sell_price'   => $this->formatWithDots($gold['h']),
+                        'low_price'    => $this->formatWithDots($gold['l']),
+                        'change'       => floatval($gold['d'] ?? 0),
+                        'change_percent' => isset($gold['dp']) ? floatval($gold['dp']) . ' 0%' : null,
+                        'date_time'         =>$gold['ts']
+                    ];
                 }
 
                 // If no gold data found
@@ -86,6 +84,6 @@ class TgjuController extends Controller
     {
         $number = preg_replace('/[^0-9]/', '', $price);
         if (empty($number)) return '0';
-        return str_replace(',', '.', number_format($number, 0, '', ','));
+        return str_replace(',', ',', number_format($number, 0, '', ','));
     }
 }

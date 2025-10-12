@@ -26,14 +26,25 @@ export type AppPageProps<
     sidebarOpen: boolean;
 };
 
-export interface User {
-    id: number;
-    name: string;
-    email: string;
-    avatar?: string;
-    email_verified_at: string | null;
-    created_at: string;
-    updated_at: string;
-}
 
 export type BreadcrumbItemType = BreadcrumbItem;
+
+
+export interface Transaction {
+    id: string,
+    user: User,
+    type: string,
+    weight: number,
+    price: number,
+    fee: number,
+    total: number
+}
+export interface User {
+    id: string;
+    name: string;
+    // email: string;
+    // avatar?: string;
+    // email_verified_at: string | null;
+    // created_at: string;
+    // updated_at: string;
+}

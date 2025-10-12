@@ -10,7 +10,7 @@ class Transaction extends Model
 {
     /** @use HasFactory<\Database\Factories\TransactionFactory> */
     use HasFactory;
-
+    
     protected $fillable = [
         "user_id",
         "type",
@@ -18,9 +18,51 @@ class Transaction extends Model
         "price",
         "fee"
     ];
-    // etch transaction belongs to on user
+    protected $casts = [
+        'weight' => 'float',
+        'price'  => 'float',
+        'fee'    => 'float',
+    ];
+
+    // types constants
+    public const TYPE_BUY   = 'buy';
+    public const TYPE_SELL   = 'sell';
+
+    public const TYPES = [
+        self::TYPE_BUY,
+        self::TYPE_SELL,
+    ];
+
+    
+    //  helper methods to check type
+    public function isValidType(string $type): bool
+    {
+        return in_array($type, self::TYPES);
+    }
+    
+    // etch transaction belongs to one user
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+
+
+    // Calculate total transaction amount
+    public function getTotalPriceAttribute(): string
+    {
+        $totlaPrice = ($this->price * $this->weight) + $this->fee;
+        return $this->convertIrPrice($totlaPrice);
+    }
+    // Formatted price
+    public function getIrPriceAttribute(): string
+    {
+        return $this->convertIrPrice($this->price);
+    }
+
+    // Format number as IRR
+    public function convertIrPrice($price): string
+    {
+        return number_format($price, 0, '.', ',');
     }
 }
