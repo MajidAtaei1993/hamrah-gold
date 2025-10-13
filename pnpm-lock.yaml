@@ -35,9 +35,6 @@ importers:
       lucide-vue-next:
         specifier: ^0.468.0
         version: 0.468.0(vue@3.5.22(typescript@5.9.3))
-      pina:
-        specifier: ^0.20.2204228
-        version: 0.20.2204228
       pinia:
         specifier: ^3.0.3
         version: 3.0.3(typescript@5.9.3)(vue@3.5.22(typescript@5.9.3))
@@ -1554,9 +1551,6 @@ packages:
   picomatch@4.0.3:
     resolution: {integrity: sha512-5gTmgEY/sqK6gFXLIsQNH19lWb4ebPDLA4SdLP7dsWkIXHWlG66oPuVvXSGFPppYZz8ZDZq0dYYrbHfBCVUb1Q==}
     engines: {node: '>=12'}
-
-  pina@0.20.2204228:
-    resolution: {integrity: sha512-osNVZg36DsDAEPHskmnTINhM5APSLsu+y8guYYX65nidbRPmnv/trAoPnacpfh8aCpsowGWR/DAYtQHZyZq8wQ==}
 
   pinia@3.0.3:
     resolution: {integrity: sha512-ttXO/InUULUXkMHpTdp9Fj4hLpD/2AoJdmAbAeW2yu1iy1k+pkFekQXw5VpC0/5p51IOR/jDaDRfRWRnMMsGOA==}
@@ -3315,8 +3309,6 @@ snapshots:
   picomatch@2.3.1: {}
 
   picomatch@4.0.3: {}
-
-  pina@0.20.2204228: {}
 
   pinia@3.0.3(typescript@5.9.3)(vue@3.5.22(typescript@5.9.3)):
     dependencies:

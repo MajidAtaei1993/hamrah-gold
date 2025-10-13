@@ -40,7 +40,6 @@
         "izitoast": "^1.4.0",
         "laravel-vite-plugin": "^2.0.0",
         "lucide-vue-next": "^0.468.0",
-        "pina": "^0.20.2204228",
         "pinia": "^3.0.3",
         "reka-ui": "^2.4.1",
         "sass": "^1.93.2",
